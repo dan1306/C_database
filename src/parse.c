@@ -15,11 +15,17 @@ void output_file(int fd, struct dbheader_t *dbhdr){
       printf("Got a bad FD from the user");
       return;
    }
+   // Ensures readability across systems with different endianness
+
+
    dbhdr->magic = htonl(dbhdr->magic);
    dbhdr->filesize = htonl(dbhdr->filesize);
    dbhdr->count = htonl(dbhdr->count);
    dbhdr->version = htonl(dbhdr->version);
-
+   // Ensures readabilty across systems with different endianness
+   // Ensures the file can be read correctly on machines with different 
+   // architectures (e.g., Intel CPUs use little-endian, while some older 
+   // systems use big-endian).
    lseek(fd, 0, SEEK_SET);
    write(fd, dbhdr, sizeof(struct dbheader_t));
    return;

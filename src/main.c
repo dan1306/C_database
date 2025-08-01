@@ -33,10 +33,10 @@ int main(int argc, char *argv[]){
                 return -1;   
         }
 
-        if(validate_db_header(dbfd, &dbhdr) == STATUS_ERROR){
-            printf("Failed to validate database header\n");
-            return -1;
-        }
+        // if(validate_db_header(dbfd, &dbhdr) == STATUS_ERROR){
+        //     printf("Failed to validate database header one\n");
+        //     return -1;
+        // }
     }
 
     if(filepath == NULL){
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
         }
 
         if(validate_db_header(dbfd, &dbhdr) == STATUS_ERROR){
-            printf("Failed to validate database heafer\n");
+            printf("Failed to validate database header two\n");
             return -1;
         }
     }
