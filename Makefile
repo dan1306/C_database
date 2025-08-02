@@ -4,6 +4,8 @@ OBJ = $(patsubst src/%.c, obj/%.o, $(SRC)) # Converts `.c` filenames to `.o` in 
 
 run: clean default
 	./$(TARGET) -f ./mynewdb.db -n 
+	./$(TARGET) -f ./mynewdb.db -a "Timmy H.,123 Sheshire LN.,120"
+
 # 	./$(TARGET) -f ./mynewdb.db	
 default: $(TARGET)
 
