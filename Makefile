@@ -1,21 +1,29 @@
-TARGET = bin/dbview  # executable located in `bin/dbview` 
+TARGET_SRV = bin/dbserver
+TARGET_CLI = bin/dbcli   
 SRC = $(wildcard src/*.c)  # all `.c` files in `src/`
 OBJ = $(patsubst src/%.c, obj/%.o, $(SRC)) # Converts `.c` filenames to `.o` in `obj/`
 
-run: clean default
-	./$(TARGET) -f ./mynewdb.db -n 
-	./$(TARGET) -f ./mynewdb.db -a "Timmy H.,123 Sheshire LN.,120"
+SRC_CLI = $(wildcard SRC/CLI/*.c)
+OBJ_CLI = $(SRC_CLI:src/cli/%.c=obj/cli/%.o)
 
-# 	./$(TARGET) -f ./mynewdb.db	
-default: $(TARGET)
+run: clean default
+	./$(TARGET) -f ./mynewdb.db -n -p 8080
+	
+default: $(TARGET_SRV) $(TARGET_CLI)
 
 clean: 
-	rm -rf obj/*
+	rm -rf obj/srv/*.o
 	rm -f bin/*
 	rm -f *.db
 
-$(TARGET): $(OBJ)
+$(TARGET_SRV): $(OBJ_SRV)
 	gcc -o $@ $?
 
-obj/%.o: src/%.c
-	gcc -c -o $@ $< -Iinclude
+$(OBJ_SRV): OBJ/SRV/%.o: src/srv/%.c
+	gcc -c $< -o $@ -Iinclude
+
+$(TARGET_CLI): $(OBJ_CLI)
+	gcc -o $@ $?
+
+$(OBJ_CLI): obj/cli/%.o: src/cli/%.c
+	gcc -c $< -o $@ -Iinclude
