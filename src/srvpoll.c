@@ -10,7 +10,7 @@
 
 #include "srvpoll.h"
 
-v
+// hello knjkn 
 
 
 void init_clients(clientstate_t* states){
