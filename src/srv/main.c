@@ -24,6 +24,7 @@ void print_usage(char *argv[]) {
     printf("\t -f (required) path to database file\n");
 }
 
+// new
 void poll_loop(unsigned short port, stuct dbheader_t *dbhdr, struct employee_t *employees){
     int listen_fd, conn_fd, freeslot;
     struct sockaddr_in server_addr, client_addr;
@@ -239,3 +240,5 @@ int main(int argc, char *argv[]){
     
     return 0;
 }
+
+// new

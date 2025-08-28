@@ -10,17 +10,21 @@
 typedef enum {
     STATE_NEW,
     STATE_CONNECTED,
-    STATE_DISCONNECTED
-} state_e
+    STATE_DISCONNECTED,
+    STATE_HELLO,
+    STATE_MSG, 
+    STATE_GOODBYE
+} state_e;
 
 // Structure to hold client state
 typedef struct{
     int fd;
-    state e_state;
-    char buffer[4096]
+    state_e e_state;
+    char buffer[4096];
 } clientstate_t;
 
-void int_clients(clientstate_t* states);
-int find_free_slot(client_state_t* states);
+void init_clients(clientstate_t* states);
+int find_free_slot(clientstate_t* states);
 int find_slot_by_fd(clientstate_t* states, int fd);
+void handle_client_fsm(struct dbheader_t *dbhdr, struct employee_t *employees, clientstate_t *client);
 #endif
